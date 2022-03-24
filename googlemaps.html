@@ -1,0 +1,50 @@
+<style>
+  #outer {
+    width: 100%;
+    background-color: silver;
+  }
+  #inner {
+    display: none;
+    animation: load;
+    animation-play-state: running;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    height: 20px;
+    background-color: blue;
+  }
+  @keyframes load {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+</style>
+<label>Color:</label><input id="color"></input>
+<button onclick="startLoop()">Update Color</button>
+<button onclick="stopLoop()">Stop</button>
+<div id="outer">
+  <div id="inner"></div>
+</div>
+<script>
+var g_loopid = null;
+var color_input = document.getElementById("color");
+var el = document.getElementById("inner");
+
+function startLoop()
+{
+  if (g_loopid != null) return;
+  g_loopid = window.setInterval(() => google.script.run.updateColor(color_input.value), 1000);
+  el.style.display = "block";
+  // el.style["animation-play-state"] = "running";
+}
+function stopLoop()
+{
+  window.clearInterval(g_loopid);
+  g_loopid = null;
+  el.style.display = "none";
+  // el.style["animation-play-state"] = "paused";
+}
+</script>
