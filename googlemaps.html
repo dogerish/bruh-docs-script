@@ -22,7 +22,7 @@
     }
   }
 </style>
-<label>Color:</label><input id="color"></input>
+<label>Color:</label><input id="color" oninput="updateLoader()"></input>
 <button onclick="startLoop()">Update Color</button>
 <button onclick="stopLoop()">Stop</button>
 <div id="outer">
@@ -32,6 +32,7 @@
 var g_loopid = null;
 var color_input = document.getElementById("color");
 var el = document.getElementById("inner");
+function updateLoader() { color_input.style["border-color"] = el.style["background-color"] = color_input.value; }
 
 function startLoop()
 {
